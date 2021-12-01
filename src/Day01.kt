@@ -5,7 +5,12 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        return input.asSequence()
+            .map { it.toInt() }
+            .windowed(3)
+            .map { it.sum() }
+            .zipWithNext()
+            .count { (prev, next) -> next > prev }
     }
 
     // test if implementation meets criteria from the description, like:
